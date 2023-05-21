@@ -10,7 +10,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        field = ['id', 'title', 'content', 'author']
+        fields = ['id', 'title', 'content', 'author']
 
     # for below lines PostSerializer must inherit from serializers.Serializer
     # id = serializers.IntegerField(read_only=True)
