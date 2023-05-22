@@ -26,7 +26,7 @@ from posts.serializers import PostSerializer
 #     DELETE — Deletes the record at the given URI
 #     PATCH — Update individual fields of a record
 
-class PostList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
+class PostList(generics.ListCreateAPIView):
     # if there is get request, all posts needs to be get, serialized
     # and needs to be returned as JSON.
 
@@ -37,11 +37,11 @@ class PostList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericA
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-    def get(self,request, *args, **kwargs):
-        return self.list(request,*args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        return self.create(request, *args, **kwargs)
+    # def get(self,request, *args, **kwargs):
+    #     return self.list(request,*args, **kwargs)
+    #
+    # def post(self, request, *args, **kwargs):
+    #     return self.create(request, *args, **kwargs)
 
     # def get(self, request, format=None):
     #     posts = Post.objects.all()
@@ -56,18 +56,18 @@ class PostList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericA
     #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class PostDetail(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request,*args, **kwargs)
-
-    def put(self, request, *args, **kwargs):
-        return self.update(request,*args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request,*args, **kwargs)
+    # def get(self, request, *args, **kwargs):
+    #     return self.retrieve(request,*args, **kwargs)
+    #
+    # def put(self, request, *args, **kwargs):
+    #     return self.update(request,*args, **kwargs)
+    #
+    # def delete(self, request, *args, **kwargs):
+    #     return self.destroy(request,*args, **kwargs)
 
     # def get_object(self, pk):
     #     try:
