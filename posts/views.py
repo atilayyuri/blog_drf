@@ -9,11 +9,14 @@ from rest_framework.views import APIView
 from django.http import Http404
 from rest_framework import mixins
 from rest_framework import generics
+from django.contrib.auth.models import User
+from rest_framework import permissions
+
 
 # https://www.django-rest-framework.org/api-guide/renderers/
 
 from posts.models import Post
-from posts.serializers import PostSerializer
+from posts.serializers import PostSerializer, UserSerializer
 
 
 # when the posts requested from the API we need to get
@@ -26,6 +29,17 @@ from posts.serializers import PostSerializer
 #     DELETE — Deletes the record at the given URI
 #     PATCH — Update individual fields of a record
 
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
 class PostList(generics.ListCreateAPIView):
     # if there is get request, all posts needs to be get, serialized
     # and needs to be returned as JSON.
@@ -36,6 +50,10 @@ class PostList(generics.ListCreateAPIView):
 
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
     # def get(self,request, *args, **kwargs):
     #     return self.list(request,*args, **kwargs)
@@ -57,8 +75,10 @@ class PostList(generics.ListCreateAPIView):
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     # def get(self, request, *args, **kwargs):
     #     return self.retrieve(request,*args, **kwargs)
