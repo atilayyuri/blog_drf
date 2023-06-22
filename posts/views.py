@@ -12,7 +12,8 @@ from rest_framework import generics
 from django.contrib.auth.models import User
 from rest_framework import permissions
 from posts.permissions import IsOwnerOrReadOnly
-
+from rest_framework.decorators import api_view
+from rest_framework.reverse import reverse
 
 # https://www.django-rest-framework.org/api-guide/renderers/
 
@@ -29,6 +30,13 @@ from posts.serializers import PostSerializer, UserSerializer
 #     PUT — Looks for a record at the given URI you provide. If it exists, update the existing record. If not, create a new record
 #     DELETE — Deletes the record at the given URI
 #     PATCH — Update individual fields of a record
+
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'users': reverse('user-list', request=request, format=format),
+        'posts': reverse('post-list', request=request, format=format)
+    })
 
 
 class UserList(generics.ListAPIView):
@@ -76,7 +84,6 @@ class PostList(generics.ListCreateAPIView):
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
-
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
