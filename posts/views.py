@@ -11,6 +11,7 @@ from rest_framework import mixins
 from rest_framework import generics
 from django.contrib.auth.models import User
 from rest_framework import permissions
+from posts.permissions import IsOwnerOrReadOnly
 
 
 # https://www.django-rest-framework.org/api-guide/renderers/
@@ -78,7 +79,7 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
     # def get(self, request, *args, **kwargs):
     #     return self.retrieve(request,*args, **kwargs)
