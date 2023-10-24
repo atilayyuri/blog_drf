@@ -24,7 +24,7 @@ python manage.py runserver 127.0.0.1:8000
 ```
 Visit the web browser with 'https://127.0.0.1:8000' 
 
-To create a new post you need to create a user using ```python manage.py createsuperuser```. After entering credentials and logging, you can create your post cards.
+To create a new post you need to create a user using ```python manage.py createsuperuser```. After entering credentials and logging in, you can create your post cards.
 
     
 
