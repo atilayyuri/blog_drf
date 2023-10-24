@@ -12,7 +12,7 @@ Ensure that you have [Python](https://www.python.org/downloads/) Version >= 3.9.
 
 - Setup the environment by executing below in order (to activate venv on Windows use ```.\venv\Scripts\Activate.ps1``` for PowerShell or ```.\venv\Scripts\activate.bat``` for cmd. Use Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force if you got authorization errors)
 ```
-cd blod_drf
+cd blog_drf
 python -m venv venv
 source .venv/bin/activate
 python -m pip install -r ./blog_drf/requirements.txt
