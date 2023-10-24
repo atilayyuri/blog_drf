@@ -1,6 +1,6 @@
 # blog_drf
 
-Example Python **Django** application to create post cards using **django-rest-framework**. This application demonstrates create-update operations using class based views in Django.
+Example Python **Django** backend application to create post cards using **django-rest-framework**. This application demonstrates create-update operations using class based views in Django.
 
 Created by Atilay Tamkan <tamkan.atilay@gmail.com>
 
