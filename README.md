@@ -14,7 +14,7 @@ Ensure that you have [Python](https://www.python.org/downloads/) Version >= 3.9.
 ```
 cd blog_drf
 python -m venv venv
-source .venv/bin/activate
+source venv/bin/activate
 python -m pip install -r ./blog_drf/requirements.txt
 ``` 
 
