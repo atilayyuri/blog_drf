@@ -1,6 +1,6 @@
 asgiref==3.6.0
 backports.zoneinfo;python_version<"3.9"
-Django==4.2.1
+Django==4.2.10
 django-filter==23.2
 djangorestframework==3.14.0
 pytz==2023.3
